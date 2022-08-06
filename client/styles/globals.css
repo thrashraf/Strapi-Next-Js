@@ -2,12 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+
+@layer components {
+
+  .nav {
+    @apply flex flex-col p-4 mt-4  rounded-lg border  md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white uppercase
+  }
+  /* for blog image */
+  .header-img {
+    @apply w-full py-10 my-10 border-y border-gray-800 
+  }
+
+  .date {
+    @apply text-xs text-gray-500 my-5
+  }
+
+  /* hero section */
+  .hero-container {
+    @apply block lg:flex
+  } 
+
+  .hero-left-container {
+    @apply lg:w-[50%] lg:pr-10 my-10 lg:my-0
+  }
+
+  .hero-row {
+    @apply flex justify-between flex-wrap border-b border-gray-900 pb-10 mb-10
+  }
+
+  .hero-heading {
+    @apply text-lg md:text-[22px] font-semibold md:leading-8
+  }
+
+  .section-title {
+    @apply my-10 text-slate-400 uppercase tracking-widest
+  }
+
+  .grid-container {
+    @apply block md:grid md:grid-cols-2 lg:grid-cols-3 gap-7
+  }
+
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 a {
