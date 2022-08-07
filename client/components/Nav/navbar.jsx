@@ -9,8 +9,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav class=' py-2.5 md:py-10 rounded '>
-      <div class='container flex flex-wrap justify-between  mx-auto '>
+    <nav className=' py-2.5 md:py-10 rounded '>
+      <div className='container flex flex-wrap justify-between  mx-auto '>
         <aside className='md:flex items-center h-10'>
           <div className='w-10 h-10 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  rounded-full flex justify-center items-center text-xl'>
             D
@@ -24,11 +24,11 @@ const Navbar = () => {
         {/* for mobile */}
         <Hamburger isOpen={isOpen} setIsOpen={setIsOpen} />
         <div
-          class={`w-full md:hidden transition ease transform duration-500  ${
+          className={`w-full md:hidden transition ease transform duration-500  ${
             !isOpen && 'hidden'
           }`}
         >
-          <ul class='nav bg-gray-900 border-gray-900'>
+          <ul className='nav bg-gray-900 border-gray-900'>
             <NavItem />
           </ul>
         </div>
