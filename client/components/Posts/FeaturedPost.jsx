@@ -1,10 +1,11 @@
 import { formatDate } from '../../helpers/formateDate';
+import Link from 'next/link';
 
 function FeaturedPost({ featured, posts }) {
   console.log(featured);
   return (
     <main className='hero-container'>
-      <aside className='hero-left-container cursor-pointer'>
+      <article className='hero-left-container cursor-pointer'>
         <img
           src={
             process.env.NEXT_PUBLIC_APIURL +
@@ -13,17 +14,19 @@ function FeaturedPost({ featured, posts }) {
           className='w-full object-cover rounded-md'
         />
         <p className='date'>{formatDate(featured.attributes.createdAt)}</p>
-        <h1 className='text-[35px] font-semibold'>
-          {featured.attributes.title}
-        </h1>
+        <Link href={featured.attributes.slug}>
+          <h1 className='text-[35px] font-semibold'>
+            {featured.attributes.title}
+          </h1>
+        </Link>
         <p className=' text-gray-500 font-light leading-7 mt-5'>
           {featured.attributes.headline}
         </p>
-      </aside>
+      </article>
 
       <aside className='hero-left-container'>
         {posts.slice(1, 4).map((post) => (
-          <section className='hero-row'>
+          <article className='hero-row'>
             <aside className='w-[41%] pr-5 '>
               <img
                 src={
@@ -38,9 +41,11 @@ function FeaturedPost({ featured, posts }) {
               <span className='date'>
                 {formatDate(post.attributes.createdAt)}
               </span>
-              <h1 className='hero-heading'>{post.attributes.title}</h1>
+              <Link href={post.attributes.slug}>
+                <h1 className='hero-heading'>{post.attributes.title}</h1>
+              </Link>
             </aside>
-          </section>
+          </article>
         ))}
       </aside>
     </main>

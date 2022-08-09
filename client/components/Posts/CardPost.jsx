@@ -1,4 +1,5 @@
 import { formatDate } from '../../helpers/formateDate';
+import Link from 'next/link';
 
 function CardPost({ posts }) {
   return (
@@ -19,7 +20,9 @@ function CardPost({ posts }) {
 
             <aside className=''>
               <p className='date'>{formatDate(post.attributes.createdAt)}</p>
-              <h1 className='hero-heading'>{post.attributes.title}</h1>
+              <Link href={post.attributes.slug}>
+                <h1 className='hero-heading'>{post.attributes.title}</h1>
+              </Link>
             </aside>
           </section>
         ))}

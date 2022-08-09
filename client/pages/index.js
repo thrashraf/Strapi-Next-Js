@@ -5,7 +5,7 @@ import FeaturedPost from '../components/Posts/FeaturedPost';
 import { formatDate } from '../helpers/formateDate';
 
 // This gets called on every request
-export async function getServerSideProps() {
+export async function getStaticProps() {
   // Fetch data from Strapi
   const endPoint = [
     fetch(`${process.env.NEXT_PUBLIC_APIURL}/api/posts?populate=*`),
