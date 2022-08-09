@@ -21,15 +21,15 @@
 
   /* hero section */
   .hero-container {
-    @apply block lg:flex
+    @apply block lg:flex md:my-20
   } 
 
   .hero-left-container {
-    @apply lg:w-[50%] lg:pr-10 my-10 lg:my-0
+    @apply lg:w-[50%] lg:pr-10 my-10 lg:my-0 
   }
 
   .hero-row {
-    @apply flex justify-between flex-wrap border-b border-gray-900 pb-10 mb-10
+    @apply flex justify-between flex-wrap border-b border-gray-900 pb-10 mb-10 cursor-pointer
   }
 
   .hero-heading {
@@ -42,6 +42,10 @@
 
   .grid-container {
     @apply block md:grid md:grid-cols-2 lg:grid-cols-3 gap-7
+  }
+
+  .card-post {
+    @apply cursor-pointer mb-20 md:mb-0
   }
 
 }
