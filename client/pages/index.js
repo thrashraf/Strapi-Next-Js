@@ -3,6 +3,7 @@ import Layout from '../components/layout';
 import CardPost from '../components/Posts/CardPost';
 import FeaturedPost from '../components/Posts/FeaturedPost';
 import { formatDate } from '../helpers/formateDate';
+import NotFound from './404';
 
 // This gets called on every request
 export async function getStaticProps() {
@@ -27,6 +28,9 @@ export async function getStaticProps() {
     };
   });
 
+  //return if error occur
+  if (isError) return { props: {} };
+
   const posts = resPosts.data;
   const featured = resFeatured.data;
 
@@ -37,7 +41,9 @@ export async function getStaticProps() {
 export default function Home({ posts: initialPosts, featured }) {
   const [blogPost, setPosts] = useState(initialPosts);
 
-  console.log(blogPost);
+  //? redirect to 404 page if not data found ❌
+  if (!blogPost) return <NotFound />;
+
   return (
     <Layout>
       <header className='header-img'>
