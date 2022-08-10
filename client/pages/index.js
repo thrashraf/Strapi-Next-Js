@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Layout from '../components/layout';
 import CardPost from '../components/Posts/CardPost';
 import FeaturedPost from '../components/Posts/FeaturedPost';
@@ -35,9 +35,9 @@ export async function getStaticProps() {
 }
 
 export default function Home({ posts: initialPosts, featured }) {
-  const [posts, setPosts] = useState(initialPosts);
+  const [blogPost, setPosts] = useState(initialPosts);
 
-  console.log(featured);
+  console.log(blogPost);
   return (
     <Layout>
       <header className='header-img'>
@@ -45,10 +45,10 @@ export default function Home({ posts: initialPosts, featured }) {
       </header>
 
       {/* featured post section */}
-      <FeaturedPost featured={featured[0]} posts={posts} />
+      <FeaturedPost featured={featured[0]} posts={blogPost} />
 
       {/* card post section */}
-      <CardPost posts={posts} />
+      <CardPost posts={blogPost} />
     </Layout>
   );
 }

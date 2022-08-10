@@ -3,7 +3,23 @@ import Layout from '../components/layout';
 import { formatDate } from '../helpers/formateDate';
 import ReactMarkdown from 'react-markdown';
 
-export async function getServerSideProps({ params }) {
+export const getStaticPaths = async () => {
+  const req = await fetch(`${process.env.NEXT_PUBLIC_APIURL}/api/posts`);
+
+  const posts = await req.json();
+
+  const paths = posts.data.map((post) => ({
+    params: { slug: post.attributes.slug.toString() },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export async function getStaticProps({ params }) {
+  console.log(params);
   const req = await fetch(
     `${process.env.NEXT_PUBLIC_APIURL}/api/posts?filters[slug][$eq]=${params.slug}&populate=thumbnail,author.avatar`
   );
@@ -52,7 +68,7 @@ function Details({ post }) {
                 process.env.NEXT_PUBLIC_APIURL +
                 post.attributes.thumbnail.data.attributes.formats.small.url
               }
-              className='m-auto rounded-md'
+              className='m-auto w-full object-cover'
             />
 
             <article className='mt-20 '>

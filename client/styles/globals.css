@@ -33,7 +33,7 @@
   }
 
   .hero-heading {
-    @apply text-lg md:text-[22px] font-semibold md:leading-8
+    @apply text-lg md:text-[22px] font-semibold md:leading-8 hover:underline
   }
 
   .section-title {
@@ -41,7 +41,7 @@
   }
 
   .grid-container {
-    @apply block md:grid md:grid-cols-2 lg:grid-cols-3 gap-7
+    @apply block md:grid md:grid-cols-2 lg:grid-cols-3 gap-10
   }
 
   .card-post {

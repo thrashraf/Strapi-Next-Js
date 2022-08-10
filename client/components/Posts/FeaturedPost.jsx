@@ -15,7 +15,7 @@ function FeaturedPost({ featured, posts }) {
         />
         <p className='date'>{formatDate(featured.attributes.createdAt)}</p>
         <Link href={featured.attributes.slug}>
-          <h1 className='text-[35px] font-semibold'>
+          <h1 className='text-[35px] font-semibold hover:underline'>
             {featured.attributes.title}
           </h1>
         </Link>

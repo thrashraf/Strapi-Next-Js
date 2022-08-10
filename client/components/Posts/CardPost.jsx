@@ -23,6 +23,10 @@ function CardPost({ posts }) {
               <Link href={post.attributes.slug}>
                 <h1 className='hero-heading'>{post.attributes.title}</h1>
               </Link>
+
+              <p className='text-gray-500 font-light leading-7 mt-5'>
+                {post.attributes.headline}
+              </p>
             </aside>
           </section>
         ))}
