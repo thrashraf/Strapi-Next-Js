@@ -4,6 +4,7 @@ import NavItem from './navItem';
 import { FiTwitter } from 'react-icons/fi';
 import { FiInstagram } from 'react-icons/fi';
 import { FiDribbble } from 'react-icons/fi';
+import Link from 'next/link';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,9 +13,15 @@ const Navbar = () => {
     <nav className=' py-2.5 md:py-10 rounded '>
       <div className='container flex flex-wrap justify-between  mx-auto '>
         <aside className='md:flex items-center h-10'>
-          <div className='w-10 h-10 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  rounded-full flex justify-center items-center text-xl'>
+          {/* <div className='w-10 h-10 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  rounded-full flex justify-center items-center text-xl'>
             D
-          </div>
+          </div> */}
+
+          <Link href='/login'>
+            <button className='bg-blue-500 py-1.5 px-6 rounded-md'>
+              Login
+            </button>
+          </Link>
 
           <ul className='nav bg-transparent invisible md:visible'>
             <NavItem />
