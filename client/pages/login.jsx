@@ -7,8 +7,8 @@ import { FaGoogle } from 'react-icons/fa';
 import { Form } from '../components/Form';
 import { Tabs } from '../components/Button/tabs';
 import useInput from '../hooks/useInput';
-import auth from '../lib/auth';
 import ErrorBadges from '../components/badges/ErrorBadges';
+import axios from 'axios';
 import Router from 'next/router';
 
 const LoginPagePage = () => {
@@ -36,34 +36,33 @@ const LoginPagePage = () => {
   const authHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setLoading(true);
-    const authProvider = new auth(name.value, email.value, password.value);
 
-    if (mode === 'Sign In') {
-      const data = await authProvider.login();
-      console.log(data.status);
-      if (data.status !== 200) {
-        setError(true);
+    try {
+      if (mode === 'Sign In') {
+        await axios.post('/api/login', {
+          identifier: email.value,
+          password: password.value,
+        });
+
         setLoading(false);
-
+        Router.push('/');
         return;
       }
-      setError(false);
+
+      await axios.post('/api/register', {
+        username: name.value,
+        email: email.value,
+        password: password.value,
+      });
+
       setLoading(false);
       Router.push('/');
       return;
-    }
-
-    const data = await authProvider.register();
-    if (data.status !== 200) {
-      setError(true);
+    } catch (error) {
+      console.log(error);
       setLoading(false);
-
-      return;
+      setError(true);
     }
-    Router.push('/');
-    setError(false);
-    setLoading(false);
   };
 
   return (

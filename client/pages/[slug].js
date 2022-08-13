@@ -19,7 +19,6 @@ export const getStaticPaths = async () => {
 };
 
 export async function getStaticProps({ params }) {
-  console.log(params);
   const req = await fetch(
     `${process.env.NEXT_PUBLIC_APIURL}/api/posts?filters[slug][$eq]=${params.slug}&populate=thumbnail,author.avatar`
   );
@@ -32,7 +31,6 @@ export async function getStaticProps({ params }) {
 }
 
 function Details({ post }) {
-  console.log(post);
   return (
     <Layout>
       <section className=' md:px-20 mt-10'>

@@ -1,3 +1,5 @@
+import { setCookie } from 'nookies';
+
 class auth {
   registerUrl = `${process.env.NEXT_PUBLIC_APIURL}/api/auth/local/register`;
   loginUrl = `${process.env.NEXT_PUBLIC_APIURL}/api/auth/local`;
@@ -15,7 +17,7 @@ class auth {
     this.password = password;
   }
 
-  login = async () => {
+  login = async (req, res) => {
     try {
       this.bodyContent = JSON.stringify({
         identifier: this.email,
@@ -31,6 +33,17 @@ class auth {
       let data = await response.json();
 
       if (!response.ok) throw data.error;
+
+      setCookie({ res }, 'jwt', data.jwt, {
+        httpOnly: true,
+        maxAge: 30 * 24 * 60 * 60,
+        path: '/',
+      });
+
+      // setCookie(null, 'fromClient', 'value', {
+      //   maxAge: 30 * 24 * 60 * 60,
+      //   path: '/',
+      // });
 
       return { data, status: response.status };
     } catch (error) {
