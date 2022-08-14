@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Hamburger from '../hamburger';
 import NavItem from './navItem';
 import { FiTwitter } from 'react-icons/fi';
@@ -9,17 +9,49 @@ import { useAuth } from '../../helpers/Context';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const btnRef = useRef();
+
+  useEffect(() => {
+    const closeDropdown = (e) => {
+      if (e.path[0] !== btnRef.current) {
+        setIsOpen(!isOpen);
+      }
+    };
+
+    document.body.addEventListener('click', closeDropdown);
+  }, []);
 
   return (
     <nav className=' py-2.5 md:py-10 rounded '>
       <div className='container flex flex-wrap justify-between  mx-auto '>
         <aside className='md:flex items-center h-10'>
           {user ? (
-            // <div className='w-10 h-10 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  rounded-full flex justify-center items-center text-xl'>
-            //   {user.username.slice(0, 1)}
-            // </div>
-            <h1>logged in</h1>
+            <div class='relative inline-block text-left'>
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className='avatar'
+                ref={btnRef}
+              >
+                {user.username.slice(0, 1)}
+              </button>
+              <div class={`userDropdown ${isOpen ? 'visible' : 'hidden'}`}>
+                <div class='py-1 '>
+                  <Link href='#'>
+                    <span class='dropdownItem flex flex-col'>
+                      <span>Profile</span>
+                    </span>
+                  </Link>
+
+                  <span
+                    class='dropdownItem flex flex-col'
+                    onClick={() => logout()}
+                  >
+                    <span>logout</span>
+                  </span>
+                </div>
+              </div>
+            </div>
           ) : (
             <Link href='/login'>
               <button className='bg-blue-500 py-1.5 px-6 rounded-md'>

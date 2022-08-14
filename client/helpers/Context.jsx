@@ -1,7 +1,7 @@
 import react, { createContext, useState, useEffect, useContext } from 'react';
-import nookies, { parseCookies } from 'nookies';
+import { parseCookies, destroyCookie } from 'nookies';
 import api from './api';
-
+import Router from 'next/router';
 const AuthContext = createContext({});
 
 export const AuthContextProvider = ({ children }) => {
@@ -24,8 +24,14 @@ export const AuthContextProvider = ({ children }) => {
     loadUserFromCookies();
   }, []);
 
+  const logout = () => {
+    destroyCookie(null, 'jwt');
+    setUser(null);
+    return Router.push('/');
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, setUser }}>
+    <AuthContext.Provider value={{ user, loading, setUser, logout }}>
       {children}
     </AuthContext.Provider>
   );

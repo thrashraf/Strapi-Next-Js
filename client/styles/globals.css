@@ -52,6 +52,20 @@
     @apply my-5 md:text-xl leading-relaxed
   }
 
+  /* nav */
+  .avatar {
+    @apply w-10 h-10 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  rounded-full flex justify-center items-center text-xl cursor-pointer
+  }
+
+  /* user dropdown */
+  .userDropdown {
+    @apply absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5
+  }
+
+  .dropdownItem {
+    @apply block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600
+  }
+
 }
 
 html,
