@@ -16,9 +16,10 @@ const Navbar = () => {
       <div className='container flex flex-wrap justify-between  mx-auto '>
         <aside className='md:flex items-center h-10'>
           {user ? (
-            <div className='w-10 h-10 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  rounded-full flex justify-center items-center text-xl'>
-              {user.username.slice(0, 1)}
-            </div>
+            // <div className='w-10 h-10 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  rounded-full flex justify-center items-center text-xl'>
+            //   {user.username.slice(0, 1)}
+            // </div>
+            <h1>logged in</h1>
           ) : (
             <Link href='/login'>
               <button className='bg-blue-500 py-1.5 px-6 rounded-md'>
