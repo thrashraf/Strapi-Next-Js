@@ -19,7 +19,7 @@ export default async (req, res) => {
       path: '/',
     });
 
-    res.status(200).end();
+    res.status(200).send(response.data.user);
   } catch (e) {
     res.status(400).send(e.response.data.error);
   }

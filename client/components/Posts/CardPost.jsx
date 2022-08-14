@@ -6,8 +6,8 @@ function CardPost({ posts }) {
     <main>
       <h1 className='section-title'>Editor's pick</h1>
       <section className='grid-container'>
-        {posts.map((post) => (
-          <section className='card-post'>
+        {posts.map((post, index) => (
+          <section key={index} className='card-post'>
             <aside>
               <img
                 src={

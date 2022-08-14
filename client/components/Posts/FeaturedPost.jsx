@@ -2,7 +2,6 @@ import { formatDate } from '../../helpers/formateDate';
 import Link from 'next/link';
 
 function FeaturedPost({ featured, posts }) {
-  console.log(featured);
   return (
     <main className='hero-container'>
       <article className='hero-left-container cursor-pointer'>
@@ -25,8 +24,8 @@ function FeaturedPost({ featured, posts }) {
       </article>
 
       <aside className='hero-left-container'>
-        {posts.slice(1, 4).map((post) => (
-          <article className='hero-row'>
+        {posts.slice(1, 4).map((post, index) => (
+          <article key={index} className='hero-row'>
             <aside className='w-[41%] pr-5 '>
               <img
                 src={

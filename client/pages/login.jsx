@@ -10,6 +10,7 @@ import useInput from '../hooks/useInput';
 import ErrorBadges from '../components/badges/ErrorBadges';
 import axios from 'axios';
 import Router from 'next/router';
+import { useAuth } from '../helpers/Context';
 
 const LoginPagePage = () => {
   const [mode, setMode] = useState('Sign In');
@@ -19,6 +20,7 @@ const LoginPagePage = () => {
   const name = useInput('');
   const email = useInput('');
   const password = useInput('');
+  const { setUser } = useAuth();
 
   //to change mode between sign in and sign up
   const changeMode = (mode) => {
@@ -39,10 +41,13 @@ const LoginPagePage = () => {
 
     try {
       if (mode === 'Sign In') {
-        await axios.post('/api/login', {
+        const res = await axios.post('/api/login', {
           identifier: email.value,
           password: password.value,
         });
+
+        //get user and set user
+        setUser(res.data);
 
         setLoading(false);
         Router.push('/');
@@ -55,11 +60,13 @@ const LoginPagePage = () => {
         password: password.value,
       });
 
+      //get user and set user
+      setUser(res.data);
       setLoading(false);
+
       Router.push('/');
       return;
     } catch (error) {
-      console.log(error);
       setLoading(false);
       setError(true);
     }

@@ -1,18 +1,34 @@
-import react, { createContext, useState, useEffect } from 'react';
+import react, { createContext, useState, useEffect, useContext } from 'react';
 import nookies, { parseCookies } from 'nookies';
+import api from './api';
 
-const AuthContext = createContext({
-  user: null,
-  loading: false,
-});
+const AuthContext = createContext({});
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const cookie = parseCookies();
-  console.log(cookie.jwt);
+  useEffect(() => {
+    async function loadUserFromCookies() {
+      const cookie = parseCookies();
+      if (cookie.jwt) {
+        api.defaults.headers.Authorization = `Bearer ${cookie.jwt}`;
+        const { data: user } = await api.get('/api/users/me');
+        setUser(user);
+      }
+      setLoading(false);
+    }
 
-  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
+    if (user) {
+    }
+    loadUserFromCookies();
+  }, []);
+
+  return (
+    <AuthContext.Provider value={{ user, loading, setUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
-export default AuthContext;
+export const useAuth = () => useContext(AuthContext);
